@@ -3,12 +3,15 @@ const ProductVariant = require('../models/ProductVariant');
 const MetalRate = require('../models/MetalRate');
 const DiamondRate = require('../models/DiamondRate');
 const Karat = require('../models/Karat');
+const { validationResult } = require('express-validator');
 
 exports.getAllProducts = async (req, res) => {
     try {
         const page = parseInt(req.query.page) || 1;
         const limit = 10;
         const search = req.query.search || '';
+        const sortBy = req.query.sortBy || 'createdAt';
+        const order = req.query.order || 'desc';
 
         const query = search ? {
             $or: [
@@ -17,10 +20,13 @@ exports.getAllProducts = async (req, res) => {
             ]
         } : {};
 
+        const sortQuery = {};
+        sortQuery[sortBy] = order === 'asc' ? 1 : -1;
+
         const products = await Product.find(query)
             .limit(limit)
             .skip((page - 1) * limit)
-            .sort({ createdAt: -1 });
+            .sort(sortQuery);
 
         const count = await Product.countDocuments(query);
 
@@ -29,7 +35,9 @@ exports.getAllProducts = async (req, res) => {
             products,
             currentPage: page,
             pages: Math.ceil(count / limit),
-            search
+            search,
+            sortBy,
+            order
         });
     } catch (err) {
         console.error(err);
@@ -55,6 +63,10 @@ exports.renderCreateForm = async (req, res) => {
 };
 
 exports.createProduct = async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.redirect('/admin/products/create?error=Invalid product data');
+    }
     try {
         const {
             name, description, category, sku, baseWeight, diamondCount,

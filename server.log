@@ -1,42 +1,15 @@
-◇ injected env (2) from .env // tip: ◈ encrypted .env [www.dotenvx.com]
+◇ injected env (2) from .env // tip: ⌁ auth for agents [www.vestauth.com]
 Server running on port 3000
-MongoDB Connected: mongodb://127.0.0.1:42201/
-[0mGET / [32m200[0m 51.827 ms - 6135[0m
-[0mGET /css/style.css [32m200[0m 5.686 ms - 5757[0m
-[0mGET /js/main.js [32m200[0m 5.351 ms - 907[0m
-[0mGET /admin/rates [32m200[0m 9.206 ms - 7934[0m
-[0mGET /css/style.css [36m304[0m 1.268 ms - -[0m
-[0mGET /js/main.js [36m304[0m 1.324 ms - -[0m
-(node:129011) [MONGOOSE] Warning: mongoose: the `new` option for `findOneAndUpdate()` and `findOneAndReplace()` is deprecated. Use `returnDocument: 'after'` instead.
-(Use `node --trace-warnings ...` to show where the warning was created)
-[0mPOST /admin/rates/karat [36m302[0m 14.044 ms - 41[0m
-[0mGET /admin/rates [32m200[0m 12.548 ms - 8455[0m
-[0mGET /css/style.css [36m304[0m 1.351 ms - -[0m
-[0mGET /js/main.js [36m304[0m 1.375 ms - -[0m
-(node:129011) [MONGOOSE] Warning: mongoose: the `new` option for `findOneAndUpdate()` and `findOneAndReplace()` is deprecated. Use `returnDocument: 'after'` instead.
-[0mPOST /admin/rates/metal [36m302[0m 5.476 ms - 41[0m
-[0mGET /admin/rates [32m200[0m 8.129 ms - 9017[0m
-[0mGET /css/style.css [36m304[0m 0.766 ms - -[0m
-[0mGET /js/main.js [36m304[0m 0.751 ms - -[0m
-[0mGET /admin/products/create [32m200[0m 8.367 ms - 6669[0m
-[0mGET /css/style.css [36m304[0m 1.010 ms - -[0m
-[0mGET /js/main.js [36m304[0m 0.915 ms - -[0m
-ValidationError: ProductVariant validation failed: diamondType: Path `diamondType` is required.
-    at model.validate (/app/node_modules/mongoose/lib/document.js:2864:36)
-    at process.processTicksAndRejections (node:internal/process/task_queues:103:5) {
-  errors: {
-    diamondType: ValidatorError: Path `diamondType` is required.
-        at SchemaString.doValidate (/app/node_modules/mongoose/lib/schemaType.js:1517:13)
-        at model.validate (/app/node_modules/mongoose/lib/document.js:2842:20)
-        at process.processTicksAndRejections (node:internal/process/task_queues:103:5) {
-      properties: [Object],
-      kind: 'required',
-      path: 'diamondType',
-      value: undefined,
-      reason: undefined,
-      [Symbol(mongoose#validatorError)]: true
-    }
-  },
-  _message: 'ProductVariant validation failed'
-}
-[0mPOST /admin/products [31m500[0m 17.462 ms - 12[0m
+MongoDB Connected: mongodb://127.0.0.1:34937/
+[0mGET / [32m200[0m 66.743 ms - 7527[0m
+[0mGET /css/style.css [32m200[0m 7.532 ms - 5757[0m
+[0mGET /js/main.js [32m200[0m 6.495 ms - 907[0m
+[0mGET /admin/rates [32m200[0m 8.261 ms - 9332[0m
+[0mGET /css/style.css [36m304[0m 1.437 ms - -[0m
+[0mGET /js/main.js [36m304[0m 2.092 ms - -[0m
+[0mGET /admin/products [32m200[0m 16.859 ms - 6464[0m
+[0mGET /css/style.css [36m304[0m 1.575 ms - -[0m
+[0mGET /js/main.js [36m304[0m 1.863 ms - -[0m
+[0mGET /admin/theme [32m200[0m 15.872 ms - 9654[0m
+[0mGET /css/style.css [36m304[0m 0.844 ms - -[0m
+[0mGET /js/main.js [36m304[0m 1.068 ms - -[0m

@@ -27,7 +27,7 @@ exports.updateThemeSettings = async (req, res) => {
         } else {
             theme = await ThemeConfig.create(updateData);
         }
-        res.redirect('/admin/theme?success=Theme updated successfully');
+        res.redirect('/admin/theme?success=Theme updated successfully. Refresh to see full changes.');
     } catch (err) {
         console.error(err);
         res.status(500).send('Server Error');

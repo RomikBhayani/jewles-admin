@@ -1,6 +1,7 @@
 const MetalRate = require('../models/MetalRate');
 const DiamondRate = require('../models/DiamondRate');
 const Karat = require('../models/Karat');
+const { validationResult } = require('express-validator');
 
 exports.getAllRates = async (req, res) => {
     try {
@@ -22,6 +23,10 @@ exports.getAllRates = async (req, res) => {
 };
 
 exports.addKarat = async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.redirect('/admin/rates?error=Invalid input for Karat');
+    }
     try {
         const { name, purity } = req.body;
         await Karat.findOneAndUpdate(
@@ -47,6 +52,10 @@ exports.deleteKarat = async (req, res) => {
 };
 
 exports.addMetalRate = async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.redirect('/admin/rates?error=Invalid input for Metal Rate');
+    }
     try {
         const { metalType, ratePerGram } = req.body;
         await MetalRate.findOneAndUpdate(
@@ -72,6 +81,10 @@ exports.deleteMetalRate = async (req, res) => {
 };
 
 exports.addDiamondRate = async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.redirect('/admin/rates?error=Invalid input for Diamond Rate');
+    }
     try {
         const { diamondType, ratePerPiece } = req.body;
         await DiamondRate.findOneAndUpdate(

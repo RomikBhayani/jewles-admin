@@ -13,6 +13,11 @@ const app = express();
 // Connect to Database
 connectDB();
 
+// Theme Cache
+let themeCache = null;
+const THEME_CACHE_TTL = 60000; // 1 minute
+let lastThemeFetch = 0;
+
 // Middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -29,24 +34,29 @@ app.set('views', path.join(__dirname, 'views'));
 // Global Middleware for Theme and Navigation
 app.use(async (req, res, next) => {
     try {
-        let theme = await ThemeConfig.findOne();
-        if (!theme) {
-            theme = {
-                primaryColor: '#0d6efd',
-                secondaryColor: '#6c757d',
-                accentColor: '#f39c12',
-                dangerColor: '#dc3545',
-                backgroundColor: '#ffffff',
-                textColor: '#212529',
-                sidebarColor: '#343a40',
-                sidebarTextColor: '#ffffff',
-                borderRadius: '0.375rem',
-                fontSize: '1rem',
-                spacing: '1rem',
-                darkMode: false
-            };
+        const now = Date.now();
+        if (!themeCache || (now - lastThemeFetch) > THEME_CACHE_TTL) {
+            themeCache = await ThemeConfig.findOne();
+            lastThemeFetch = now;
+
+            if (!themeCache) {
+                themeCache = {
+                    primaryColor: '#0d6efd',
+                    secondaryColor: '#6c757d',
+                    accentColor: '#f39c12',
+                    dangerColor: '#dc3545',
+                    backgroundColor: '#ffffff',
+                    textColor: '#212529',
+                    sidebarColor: '#343a40',
+                    sidebarTextColor: '#ffffff',
+                    borderRadius: '0.375rem',
+                    fontSize: '1rem',
+                    spacing: '1rem',
+                    darkMode: false
+                };
+            }
         }
-        res.locals.theme = theme;
+        res.locals.theme = themeCache;
         next();
     } catch (err) {
         console.error('Theme middleware error:', err);
