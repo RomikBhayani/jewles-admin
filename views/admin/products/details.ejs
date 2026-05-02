@@ -1,0 +1,37 @@
+<div class="product-details">
+    <div class="card">
+        <h2><%= product.name %> (<%= product.sku %>)</h2>
+        <p><%= product.description %></p>
+        <hr style="margin: 1rem 0;">
+        <div style="display: flex; gap: 2rem;">
+            <div><strong>Category:</strong> <%= product.category %></div>
+            <div><strong>Base Weight:</strong> <%= product.baseWeight %>g</div>
+            <div><strong>Diamond Count:</strong> <%= product.diamondCount %></div>
+            <div><strong>Making Charges:</strong> <%= product.makingChargesPercent %>%</div>
+        </div>
+    </div>
+
+    <h3>Generated Variants & Pricing</h3>
+    <div class="card">
+        <table>
+            <thead>
+                <tr>
+                    <th>Metal</th>
+                    <th>Karat</th>
+                    <th>Diamond Type</th>
+                    <th>Calculated Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% variants.forEach(variant => { %>
+                    <tr>
+                        <td><%= variant.metal %></td>
+                        <td><%= variant.karat %></td>
+                        <td><%= variant.diamondType %></td>
+                        <td style="font-weight: bold; color: var(--primary-color);">$<%= variant.price.toLocaleString() %></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</div>

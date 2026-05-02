@@ -1,0 +1,141 @@
+<div class="rate-management">
+    <div class="grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+        <!-- Metal Rates Section -->
+        <section class="card">
+            <h2>Metal Rates (per gram)</h2>
+            <form action="/admin/rates/metal" method="POST" style="margin-bottom: 2rem;">
+                <div class="form-group">
+                    <label>Metal Type</label>
+                    <select name="metalType" required class="form-control">
+                        <% predefinedMetals.forEach(metal => { %>
+                            <option value="<%= metal %>"><%= metal %></option>
+                        <% }) %>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Rate (USD/gram)</label>
+                    <input type="number" step="0.01" name="ratePerGram" required class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary" style="margin-top: 1rem;">Add/Update Metal Rate</button>
+            </form>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metal</th>
+                        <th>Rate ($/g)</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% metalRates.forEach(rate => { %>
+                        <tr>
+                            <td><%= rate.metalType %></td>
+                            <td>$<%= rate.ratePerGram %></td>
+                            <td>
+                                <form action="/admin/rates/metal/<%= rate._id %>?_method=DELETE" method="POST" style="display:inline;">
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Diamond Rates Section -->
+        <section class="card">
+            <h2>Diamond Rates (per piece)</h2>
+            <form action="/admin/rates/diamond" method="POST" style="margin-bottom: 2rem;">
+                <div class="form-group">
+                    <label>Diamond Type</label>
+                    <select name="diamondType" required class="form-control">
+                        <% predefinedDiamonds.forEach(diamond => { %>
+                            <option value="<%= diamond %>"><%= diamond %></option>
+                        <% }) %>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Rate (USD/piece)</label>
+                    <input type="number" step="0.01" name="ratePerPiece" required class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary" style="margin-top: 1rem;">Add/Update Diamond Rate</button>
+            </form>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Diamond Type</th>
+                        <th>Rate ($/pc)</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% diamondRates.forEach(rate => { %>
+                        <tr>
+                            <td><%= rate.diamondType %></td>
+                            <td>$<%= rate.ratePerPiece %></td>
+                            <td>
+                                <form action="/admin/rates/diamond/<%= rate._id %>?_method=DELETE" method="POST" style="display:inline;">
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </section>
+    </div>
+
+    <!-- Karat Management Section -->
+    <section class="card" style="margin-top: 2rem;">
+        <h2>Karat Purity Management</h2>
+        <form action="/admin/rates/karat" method="POST" style="margin-bottom: 2rem; display: flex; gap: 1rem; align-items: flex-end;">
+            <div class="form-group" style="flex: 1;">
+                <label>Karat Name (e.g., 18K)</label>
+                <input type="text" name="name" required class="form-control" placeholder="18K">
+            </div>
+            <div class="form-group" style="flex: 1;">
+                <label>Purity Factor (e.g., 0.75)</label>
+                <input type="number" step="0.001" name="purity" required class="form-control" placeholder="0.75">
+            </div>
+            <button type="submit" class="btn btn-primary">Add/Update Karat</button>
+        </form>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Karat Name</th>
+                    <th>Purity Factor</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% karats.forEach(karat => { %>
+                    <tr>
+                        <td><%= karat.name %></td>
+                        <td><%= karat.purity %></td>
+                        <td>
+                            <form action="/admin/rates/karat/<%= karat._id %>?_method=DELETE" method="POST" style="display:inline;">
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </section>
+</div>
+
+<style>
+    .form-control {
+        width: 100%;
+        padding: 0.5rem;
+        border-radius: var(--border-radius);
+        border: 1px solid #ccc;
+    }
+    .btn-sm {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.875rem;
+    }
+</style>

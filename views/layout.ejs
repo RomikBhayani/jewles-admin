@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %> | Jewellery Admin</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        :root {
+            --primary-color: <%= theme.primaryColor %>;
+            --secondary-color: <%= theme.secondaryColor %>;
+            --accent-color: <%= theme.accentColor %>;
+            --danger-color: <%= theme.dangerColor %>;
+            --bg-color: <%= theme.backgroundColor %>;
+            --text-color: <%= theme.textColor %>;
+            --sidebar-color: <%= theme.sidebarColor %>;
+            --sidebar-text-color: <%= theme.sidebarTextColor %>;
+            --border-radius: <%= theme.borderRadius %>;
+            --font-size: <%= theme.fontSize %>;
+            --spacing: <%= theme.spacing %>;
+        }
+    </style>
+</head>
+<body class="<%= theme.darkMode ? 'dark-mode' : '' %>">
+    <div class="admin-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>JewelAdmin</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="/">Dashboard</a></li>
+                    <li><a href="/admin/products">Products</a></li>
+                    <li><a href="/admin/rates">Rate Management</a></li>
+                    <li><a href="/admin/theme">Theme Settings</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <header class="topbar">
+                <h1><%= title %></h1>
+                <div class="user-profile">
+                    Admin
+                </div>
+            </header>
+            <div id="toast-container" class="toast-container"></div>
+            <section class="content">
+                <%- body %>
+            </section>
+        </main>
+    </div>
+    <script src="/js/main.js"></script>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('success')) {
+            showToast(urlParams.get('success'), 'success');
+        }
+        if (urlParams.has('error')) {
+            showToast(urlParams.get('error'), 'danger');
+        }
+    </script>
+    <style>
+        .toast-container {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 9999;
+        }
+        .toast {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            animation: slideIn 0.3s ease-out;
+        }
+        @keyframes slideIn {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+    </style>
+</body>
+</html>

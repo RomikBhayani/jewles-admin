@@ -1,0 +1,79 @@
+<div class="card">
+    <form action="/admin/products" method="POST">
+        <div class="form-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+            <div class="left-col">
+                <h3>Basic Information</h3>
+                <div class="form-group">
+                    <label>Product Name</label>
+                    <input type="text" name="name" required class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>SKU</label>
+                    <input type="text" name="sku" required class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Category</label>
+                    <input type="text" name="category" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea name="description" class="form-control" rows="4"></textarea>
+                </div>
+
+                <h3>Material Specs</h3>
+                <div class="form-group">
+                    <label>Base Metal Weight (grams)</label>
+                    <input type="number" step="0.01" name="baseWeight" required class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Diamond Count (pieces)</label>
+                    <input type="number" name="diamondCount" value="0" required class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Making Charges (%)</label>
+                    <input type="number" step="0.1" name="makingChargesPercent" value="10" required class="form-control">
+                </div>
+            </div>
+
+            <div class="right-col">
+                <h3>Variant Selectors</h3>
+                <div class="form-group">
+                    <label>Available Metals</label>
+                    <div class="checkbox-group">
+                        <% metals.forEach(metal => { %>
+                            <label><input type="checkbox" name="availableMetals" value="<%= metal.metalType %>"> <%= metal.metalType %></label><br>
+                        <% }) %>
+                    </div>
+                </div>
+                <div class="form-group" style="margin-top: 1rem;">
+                    <label>Available Karats</label>
+                    <div class="checkbox-group">
+                        <% karats.forEach(karat => { %>
+                            <label><input type="checkbox" name="availableKarats" value="<%= karat %>"> <%= karat %></label><br>
+                        <% }) %>
+                    </div>
+                </div>
+                <div class="form-group" style="margin-top: 1rem;">
+                    <label>Available Diamond Types</label>
+                    <div class="checkbox-group">
+                        <% diamonds.forEach(diamond => { %>
+                            <label><input type="checkbox" name="availableDiamonds" value="<%= diamond.diamondType %>"> <%= diamond.diamondType %></label><br>
+                        <% }) %>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 2rem; text-align: right;">
+            <button type="submit" class="btn btn-primary btn-lg">Create Product & Generate Variants</button>
+        </div>
+    </form>
+</div>
+
+<style>
+    .form-group { margin-bottom: 1rem; }
+    .form-group label { display: block; margin-bottom: 0.3rem; font-weight: bold; }
+    .form-control { width: 100%; padding: 0.6rem; border: 1px solid #ddd; border-radius: var(--border-radius); }
+    .checkbox-group { border: 1px solid #ddd; padding: 1rem; border-radius: var(--border-radius); max-height: 200px; overflow-y: auto; }
+    .btn-lg { padding: 0.8rem 2rem; font-size: 1.1rem; }
+</style>
