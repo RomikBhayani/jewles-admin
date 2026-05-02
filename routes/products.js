@@ -6,6 +6,7 @@ router.get('/', productController.getAllProducts);
 router.get('/create', productController.renderCreateForm);
 router.post('/', productController.createProduct);
 router.get('/:id', productController.getProductDetails);
+router.get('/:id/preview', productController.renderProductPreview);
 router.delete('/:id', productController.deleteProduct);
 
 module.exports = router;

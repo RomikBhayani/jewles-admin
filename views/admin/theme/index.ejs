@@ -1,60 +1,96 @@
 <div class="card">
     <form action="/admin/theme" method="POST">
-        <div class="form-group">
-            <label>Dark Mode</label>
-            <input type="checkbox" name="darkMode" <%= themeConfig.darkMode ? 'checked' : '' %>>
-        </div>
-        <div class="form-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem;">
-            <div class="form-group">
-                <label>Primary Color</label>
-                <input type="color" name="primaryColor" value="<%= themeConfig.primaryColor %>">
-            </div>
-            <div class="form-group">
-                <label>Secondary Color</label>
-                <input type="color" name="secondaryColor" value="<%= themeConfig.secondaryColor %>">
-            </div>
-            <div class="form-group">
-                <label>Accent Color</label>
-                <input type="color" name="accentColor" value="<%= themeConfig.accentColor %>">
-            </div>
-            <div class="form-group">
-                <label>Danger Color</label>
-                <input type="color" name="dangerColor" value="<%= themeConfig.dangerColor %>">
-            </div>
-            <div class="form-group">
-                <label>Background Color</label>
-                <input type="color" name="backgroundColor" value="<%= themeConfig.backgroundColor %>">
-            </div>
-            <div class="form-group">
-                <label>Text Color</label>
-                <input type="color" name="textColor" value="<%= themeConfig.textColor %>">
-            </div>
-            <div class="form-group">
-                <label>Sidebar Color</label>
-                <input type="color" name="sidebarColor" value="<%= themeConfig.sidebarColor %>">
-            </div>
-            <div class="form-group">
-                <label>Sidebar Text Color</label>
-                <input type="color" name="sidebarTextColor" value="<%= themeConfig.sidebarTextColor %>">
-            </div>
-            <div class="form-group">
-                <label>Border Radius (e.g. 0.375rem)</label>
-                <input type="text" name="borderRadius" value="<%= themeConfig.borderRadius %>">
-            </div>
-            <div class="form-group">
-                <label>Font Size (e.g. 1rem)</label>
-                <input type="text" name="fontSize" value="<%= themeConfig.fontSize %>">
-            </div>
-            <div class="form-group">
-                <label>Spacing (e.g. 1rem)</label>
-                <input type="text" name="spacing" value="<%= themeConfig.spacing %>">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border-color);">
+            <h2 style="margin-bottom: 0;"><i class="fas fa-magic"></i> Visual Configuration</h2>
+            <div style="display: flex; align-items: center; gap: 0.5rem; background: #f1f5f9; padding: 0.5rem 1rem; border-radius: 100px;">
+                <label style="margin-bottom: 0; font-size: 0.8rem; font-weight: 600;">Dark Mode</label>
+                <input type="checkbox" name="darkMode" <%= themeConfig.darkMode ? 'checked' : '' %> style="width: 18px; height: 18px;">
             </div>
         </div>
-        <div style="margin-top: 1rem;">
-            <button type="submit" class="btn btn-primary">Save Theme Settings</button>
+
+        <div class="theme-sections" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+            <!-- Brand Colors -->
+            <div class="theme-section">
+                <h3 style="font-size: 0.9rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1rem;">Brand Colors</h3>
+                <div class="form-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label>Primary</label>
+                        <input type="color" name="primaryColor" value="<%= themeConfig.primaryColor %>" class="color-picker">
+                    </div>
+                    <div class="form-group">
+                        <label>Secondary</label>
+                        <input type="color" name="secondaryColor" value="<%= themeConfig.secondaryColor %>" class="color-picker">
+                    </div>
+                    <div class="form-group">
+                        <label>Accent</label>
+                        <input type="color" name="accentColor" value="<%= themeConfig.accentColor %>" class="color-picker">
+                    </div>
+                    <div class="form-group">
+                        <label>Danger</label>
+                        <input type="color" name="dangerColor" value="<%= themeConfig.dangerColor %>" class="color-picker">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interface Colors -->
+            <div class="theme-section">
+                <h3 style="font-size: 0.9rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1rem;">Interface</h3>
+                <div class="form-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label>Background</label>
+                        <input type="color" name="backgroundColor" value="<%= themeConfig.backgroundColor %>" class="color-picker">
+                    </div>
+                    <div class="form-group">
+                        <label>Text</label>
+                        <input type="color" name="textColor" value="<%= themeConfig.textColor %>" class="color-picker">
+                    </div>
+                    <div class="form-group">
+                        <label>Sidebar</label>
+                        <input type="color" name="sidebarColor" value="<%= themeConfig.sidebarColor %>" class="color-picker">
+                    </div>
+                    <div class="form-group">
+                        <label>Sidebar Text</label>
+                        <input type="color" name="sidebarTextColor" value="<%= themeConfig.sidebarTextColor %>" class="color-picker">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Layout Settings -->
+            <div class="theme-section">
+                <h3 style="font-size: 0.9rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1rem;">Layout & Type</h3>
+                <div class="form-group">
+                    <label>Border Radius</label>
+                    <input type="text" name="borderRadius" value="<%= themeConfig.borderRadius %>" class="form-control" placeholder="0.5rem">
+                </div>
+                <div class="form-group">
+                    <label>Base Font Size</label>
+                    <input type="text" name="fontSize" value="<%= themeConfig.fontSize %>" class="form-control" placeholder="14px">
+                </div>
+                <div class="form-group">
+                    <label>Global Spacing</label>
+                    <input type="text" name="spacing" value="<%= themeConfig.spacing %>" class="form-control" placeholder="1.5rem">
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color); text-align: right;">
+            <button type="submit" class="btn btn-primary btn-lg">
+                <i class="fas fa-save"></i> Apply Changes Globally
+            </button>
         </div>
     </form>
 </div>
+
+<style>
+    .color-picker {
+        width: 100%;
+        height: 45px;
+        padding: 4px;
+        border-radius: var(--border-radius);
+        border: 1px solid var(--border-color);
+        cursor: pointer;
+    }
+</style>
 
 <style>
     .form-group label {

@@ -1,19 +1,70 @@
-<div class="card">
-    <h2>Welcome to JewelAdmin</h2>
-    <p>Use the sidebar to manage products, rates, and theme settings.</p>
+<div class="welcome-banner card" style="background: linear-gradient(135deg, var(--primary-color), var(--accent-color)); color: white; border: none;">
+    <h2 style="color: white; margin-bottom: 0.5rem;">Welcome back, Admin!</h2>
+    <p style="opacity: 0.9;">Manage your jewellery empire effortlessly. Check the latest rates and product variants below.</p>
 </div>
 
-<div class="dashboard-stats" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem;">
+<div class="stats-grid">
+    <div class="card stat-card">
+        <div class="stat-icon" style="background-color: rgba(13, 110, 253, 0.1); color: #0d6efd;">
+            <i class="fas fa-box"></i>
+        </div>
+        <div class="stat-info">
+            <h3>Total Products</h3>
+            <div class="value"><%= productCount %></div>
+        </div>
+    </div>
+    <div class="card stat-card">
+        <div class="stat-icon" style="background-color: rgba(25, 135, 84, 0.1); color: #198754;">
+            <i class="fas fa-coins"></i>
+        </div>
+        <div class="stat-info">
+            <h3>Active Metals</h3>
+            <div class="value"><%= metalCount %></div>
+        </div>
+    </div>
+    <div class="card stat-card">
+        <div class="stat-icon" style="background-color: rgba(243, 156, 18, 0.1); color: #f39c12;">
+            <i class="fas fa-gem"></i>
+        </div>
+        <div class="stat-info">
+            <h3>Active Diamonds</h3>
+            <div class="value"><%= diamondCount %></div>
+        </div>
+    </div>
+</div>
+
+<div class="grid" style="display: grid; grid-template-columns: 2fr 1fr; gap: var(--spacing);">
     <div class="card">
-        <h3>Total Products</h3>
-        <p style="font-size: 2rem; font-weight: bold;"><%= productCount %></p>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+            <h2 style="margin-bottom: 0;">Quick Actions</h2>
+        </div>
+        <div class="action-buttons" style="display: flex; gap: 1rem;">
+            <a href="/admin/products/create" class="btn btn-primary">
+                <i class="fas fa-plus"></i> New Product
+            </a>
+            <a href="/admin/rates" class="btn btn-secondary">
+                <i class="fas fa-edit"></i> Update Rates
+            </a>
+            <a href="/admin/theme" class="btn btn-secondary">
+                <i class="fas fa-cog"></i> Theme Config
+            </a>
+        </div>
     </div>
     <div class="card">
-        <h3>Active Metals</h3>
-        <p style="font-size: 2rem; font-weight: bold;"><%= metalCount %></p>
-    </div>
-    <div class="card">
-        <h3>Active Diamonds</h3>
-        <p style="font-size: 2rem; font-weight: bold;"><%= diamondCount %></p>
+        <h2>System Status</h2>
+        <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+            <div style="display: flex; justify-content: space-between;">
+                <span class="text-muted">Database</span>
+                <span style="color: var(--success-color); font-weight: 600;">Online</span>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+                <span class="text-muted">Storage</span>
+                <span style="font-weight: 600;">92% Free</span>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+                <span class="text-muted">Server Time</span>
+                <span style="font-weight: 600;"><%= new Date().toLocaleTimeString() %></span>
+            </div>
+        </div>
     </div>
 </div>

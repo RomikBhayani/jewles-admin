@@ -1,9 +1,14 @@
-<div class="actions" style="margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center;">
-    <a href="/admin/products/create" class="btn btn-primary">Add New Product</a>
+<div class="actions" style="margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center;">
+    <a href="/admin/products/create" class="btn btn-primary">
+        <i class="fas fa-plus"></i> Add New Product
+    </a>
 
-    <form action="/admin/products" method="GET" style="display: flex; gap: 0.5rem;">
-        <input type="text" name="search" placeholder="Search by name or SKU..." value="<%= search %>" class="form-control" style="width: 250px;">
-        <button type="submit" class="btn btn-secondary">Search</button>
+    <form action="/admin/products" method="GET" style="display: flex; gap: 0.5rem; background: #fff; padding: 0.5rem; border-radius: var(--border-radius); box-shadow: var(--shadow);">
+        <div style="position: relative;">
+            <i class="fas fa-search" style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--text-muted);"></i>
+            <input type="text" name="search" placeholder="Search products..." value="<%= search %>" class="form-control" style="width: 300px; padding-left: 2.5rem; border: none;">
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
     </form>
 </div>
 
@@ -26,10 +31,16 @@
                     <td><%= product.category %></td>
                     <td><%= product.baseWeight %></td>
                     <td>
-                        <a href="/admin/products/<%= product._id %>" class="btn btn-sm btn-primary" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">View</a>
-                        <form action="/admin/products/<%= product._id %>?_method=DELETE" method="POST" style="display:inline;">
-                            <button type="submit" class="btn btn-danger btn-sm" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;" onclick="return confirm('Are you sure?')">Delete</button>
-                        </form>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <a href="/admin/products/<%= product._id %>" class="btn btn-sm btn-secondary" title="View Details">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            <form action="/admin/products/<%= product._id %>?_method=DELETE" method="POST" style="display:inline;">
+                                <button type="submit" class="btn btn-sm btn-danger" title="Delete Product">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
             <% }) %>

@@ -1,13 +1,44 @@
 <div class="product-details">
-    <div class="card">
-        <h2><%= product.name %> (<%= product.sku %>)</h2>
-        <p><%= product.description %></p>
-        <hr style="margin: 1rem 0;">
-        <div style="display: flex; gap: 2rem;">
-            <div><strong>Category:</strong> <%= product.category %></div>
-            <div><strong>Base Weight:</strong> <%= product.baseWeight %>g</div>
-            <div><strong>Diamond Count:</strong> <%= product.diamondCount %></div>
-            <div><strong>Making Charges:</strong> <%= product.makingChargesPercent %>%</div>
+    <div style="margin-bottom: 2rem;">
+        <a href="/admin/products" class="btn btn-secondary btn-sm">
+            <i class="fas fa-arrow-left"></i> Back to Products
+        </a>
+    </div>
+
+    <div class="card" style="position: relative; overflow: hidden;">
+        <div style="position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--primary-color);"></div>
+        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <div>
+                <h2 style="font-size: 1.75rem; margin-bottom: 0.5rem;"><%= product.name %></h2>
+                <span style="background: #e2e8f0; padding: 0.25rem 0.75rem; border-radius: 100px; font-size: 0.75rem; font-weight: 700; color: #475569;"><%= product.sku %></span>
+            </div>
+            <div style="text-align: right;">
+                <div style="font-size: 0.875rem; color: var(--text-muted);">Category</div>
+                <div style="font-weight: 600;"><%= product.category || 'Uncategorized' %></div>
+            </div>
+        </div>
+
+        <p style="margin: 1.5rem 0; color: var(--text-muted); line-height: 1.6;"><%= product.description || 'No description provided.' %></p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color);">
+            <div>
+                <div style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.25rem;">Base Weight</div>
+                <div style="font-weight: 600; font-size: 1.1rem;"><%= product.baseWeight %>g</div>
+            </div>
+            <div>
+                <div style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.25rem;">Diamonds</div>
+                <div style="font-weight: 600; font-size: 1.1rem;"><%= product.diamondCount %> pcs</div>
+            </div>
+            <div>
+                <div style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.25rem;">Making Charges</div>
+                <div style="font-weight: 600; font-size: 1.1rem;"><%= product.makingChargesPercent %>%</div>
+            </div>
+        </div>
+
+        <div style="margin-top: 1.5rem; text-align: right;">
+            <a href="/admin/products/<%= product._id %>/preview" target="_blank" class="btn btn-secondary">
+                <i class="fas fa-external-link-alt"></i> Live Customer Preview
+            </a>
         </div>
     </div>
 

@@ -125,6 +125,30 @@ exports.getProductDetails = async (req, res) => {
     }
 };
 
+exports.renderProductPreview = async (req, res) => {
+    try {
+        const product = await Product.findById(req.params.id);
+        const variants = await ProductVariant.find({ product: product._id });
+
+        const metalRates = await MetalRate.find();
+        const diamondRates = await DiamondRate.find();
+        const karats = await Karat.find();
+
+        res.render('admin/products/preview', {
+            title: `Preview: ${product.name}`,
+            product,
+            variants,
+            metalRates,
+            diamondRates,
+            karats,
+            layout: false // Render without the admin layout for a customer-facing look
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server Error');
+    }
+};
+
 exports.deleteProduct = async (req, res) => {
     try {
         await Product.findByIdAndDelete(req.params.id);
