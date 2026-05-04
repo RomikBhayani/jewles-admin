@@ -1,15 +1,16 @@
-◇ injected env (2) from .env // tip: ⌁ auth for agents [www.vestauth.com]
+(node:186146) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
 Server running on port 3000
-MongoDB Connected: mongodb://127.0.0.1:34937/
-[0mGET / [32m200[0m 66.743 ms - 7527[0m
-[0mGET /css/style.css [32m200[0m 7.532 ms - 5757[0m
-[0mGET /js/main.js [32m200[0m 6.495 ms - 907[0m
-[0mGET /admin/rates [32m200[0m 8.261 ms - 9332[0m
-[0mGET /css/style.css [36m304[0m 1.437 ms - -[0m
-[0mGET /js/main.js [36m304[0m 2.092 ms - -[0m
-[0mGET /admin/products [32m200[0m 16.859 ms - 6464[0m
-[0mGET /css/style.css [36m304[0m 1.575 ms - -[0m
-[0mGET /js/main.js [36m304[0m 1.863 ms - -[0m
-[0mGET /admin/theme [32m200[0m 15.872 ms - 9654[0m
-[0mGET /css/style.css [36m304[0m 0.844 ms - -[0m
-[0mGET /js/main.js [36m304[0m 1.068 ms - -[0m
+MongoDB Connected: mongodb://127.0.0.1:29600/
+[0mGET / [32m200[0m 51.149 ms - -[0m
+[0mGET /js/main.js [32m200[0m 4.092 ms - 907[0m
+[0mGET /css/style.css [32m200[0m 6.221 ms - -[0m
+[0mGET /admin/rates [32m200[0m 9.252 ms - -[0m
+[0mGET /css/style.css [36m304[0m 1.430 ms - -[0m
+[0mGET /js/main.js [36m304[0m 1.915 ms - -[0m
+[0mGET /admin/products [32m200[0m 8.815 ms - -[0m
+[0mGET /css/style.css [36m304[0m 1.784 ms - -[0m
+[0mGET /js/main.js [36m304[0m 2.644 ms - -[0m
+[0mGET /admin/theme [32m200[0m 17.997 ms - -[0m
+[0mGET /css/style.css [36m304[0m 1.060 ms - -[0m
+[0mGET /js/main.js [36m304[0m 1.033 ms - -[0m

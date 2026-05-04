@@ -3,6 +3,8 @@ const path = require('path');
 const expressLayouts = require('express-ejs-layouts');
 const methodOverride = require('method-override');
 const morgan = require('morgan');
+const helmet = require('helmet');
+const compression = require('compression');
 const { connectDB } = require('./config/db');
 const ThemeConfig = require('./models/ThemeConfig');
 const dashboardController = require('./controllers/dashboardController');
@@ -19,6 +21,18 @@ const THEME_CACHE_TTL = 60000; // 1 minute
 let lastThemeFetch = 0;
 
 // Middleware
+app.use(helmet({
+    contentSecurityPolicy: {
+        directives: {
+            ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+            "script-src": ["'self'", "'unsafe-inline'", "cdnjs.cloudflare.com"],
+            "style-src": ["'self'", "'unsafe-inline'", "cdnjs.cloudflare.com", "fonts.googleapis.com"],
+            "font-src": ["'self'", "cdnjs.cloudflare.com", "fonts.gstatic.com"],
+            "img-src": ["'self'", "data:", "https:"]
+        },
+    }
+}));
+app.use(compression());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(methodOverride('_method'));

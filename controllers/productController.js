@@ -4,6 +4,7 @@ const MetalRate = require('../models/MetalRate');
 const DiamondRate = require('../models/DiamondRate');
 const Karat = require('../models/Karat');
 const { validationResult } = require('express-validator');
+const { cartesianProduct } = require('../utils/variantHelper');
 
 exports.getAllProducts = async (req, res) => {
     try {
@@ -173,20 +174,20 @@ exports.deleteProduct = async (req, res) => {
 };
 
 async function generateVariants(product) {
-    const variants = [];
+    const metals = Array.isArray(product.availableMetals) ? product.availableMetals : [product.availableMetals];
+    const karats = Array.isArray(product.availableKarats) ? product.availableKarats : [product.availableKarats];
+    const diamonds = Array.isArray(product.availableDiamonds) ? product.availableDiamonds : [product.availableDiamonds];
 
-    for (const metal of product.availableMetals) {
-        for (const karat of product.availableKarats) {
-            for (const diamondType of product.availableDiamonds) {
-                variants.push({
-                    product: product._id,
-                    metal,
-                    karat,
-                    diamondType
-                });
-            }
-        }
-    }
+    // This structure allows for adding 4th or 5th selectors easily
+    const options = [metals, karats, diamonds];
+    const combinations = cartesianProduct(options);
+
+    const variants = combinations.map(combo => ({
+        product: product._id,
+        metal: combo[0],
+        karat: combo[1],
+        diamondType: combo[2]
+    }));
 
     await ProductVariant.insertMany(variants);
 }
